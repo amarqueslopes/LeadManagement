@@ -14,9 +14,9 @@ namespace LeadManagement.Domain.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Lead>> GetInvitedLeadsAsync()
+        public async Task<IEnumerable<Lead>> GetLeadsByStatusAsync(string status)
         {
-            return await _context.Leads.Where(l => l.Status == "Invited").ToListAsync();
+            return await _context.Leads.Where(l => l.Status == status).ToListAsync();
         }
 
         public async Task<Lead> GetLeadByIdAsync(int id)
@@ -28,6 +28,11 @@ namespace LeadManagement.Domain.Repositories
         {
             _context.Entry(lead).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+        }
+
+        public async Task PublishEventAsync(object @event)
+        {
+            Console.WriteLine($"Event published: {@event.GetType().Name}");
         }
     }
 }

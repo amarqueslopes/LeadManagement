@@ -19,7 +19,15 @@ public class LeadsController : ControllerBase
     [HttpGet("Invited")]
     public async Task<ActionResult<IEnumerable<Lead>>> GetInvitedLeads()
     {
-        var leads = await _leadService.GetInvitedLeadsAsync();
+        var leads = await _leadService.GetLeadsByStatusAsync("Invited");
+        return Ok(leads);
+    }
+
+    // GET: api/Leads/Accepted
+    [HttpGet("Accepted")]
+    public async Task<ActionResult<IEnumerable<Lead>>> GetAcceptedLeads()
+    {
+        var leads = await _leadService.GetLeadsByStatusAsync("Accepted");
         return Ok(leads);
     }
 

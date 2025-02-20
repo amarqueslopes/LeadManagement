@@ -4,7 +4,7 @@ namespace LeadManagement.Application.Interfaces
 {
     public interface ILeadService
     {
-        Task<IEnumerable<Lead>> GetInvitedLeadsAsync();
+        Task<IEnumerable<Lead>> GetLeadsByStatusAsync(string status);
         Task AcceptLeadAsync(int id);
         Task DeclineLeadAsync(int id);
     }
