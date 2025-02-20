@@ -1,7 +1,7 @@
 import { Lead } from '../interfaces/Lead';
 import api from './Api';
 
-const LEADS_URL = 'api/Leads';
+const LEADS_URL = '/api/Leads';
 
 export const getLeadsByStatus = async (status: string): Promise<Lead[]> => {
     const response = await api.get<Lead[]>(`${LEADS_URL}/${status}`);

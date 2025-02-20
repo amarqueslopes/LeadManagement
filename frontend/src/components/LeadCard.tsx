@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Box, Button, Card, CardContent, Container, Typography, Stack } from '@mui/material';
+import { Avatar, Box, Button, Card, CardContent, Typography } from '@mui/material';
 import { LocationOn, Work, Phone, Email } from "@mui/icons-material";
 import { Lead } from '../interfaces/Lead';
 
@@ -17,7 +17,7 @@ const LeadCard = ({ lead, onAccept, onDecline, index }: { lead: Lead; onAccept: 
     };
 
     return (
-        <Card sx={{ margin: 2, padding: 2 }}>
+        <Card sx={{ marginTop: 2 }}>
             <CardContent>
                 <Box display="flex" alignItems="center">
                     <Avatar sx={{ bgcolor: avatarBgColor, color: "white", mr: 2 }}>{lead.firstName[0].toUpperCase()}</Avatar>
@@ -33,7 +33,9 @@ const LeadCard = ({ lead, onAccept, onDecline, index }: { lead: Lead; onAccept: 
                     <Typography variant="body2" sx={{ mr: 2 }}>{lead.category}</Typography>
                     <Typography variant="body2">Job ID:</Typography>
                     <Typography variant="body2" sx={{ marginLeft: 1, mr: 2 }}>{lead.id}</Typography>
-                    <Typography variant="body2">{formatPrice(lead.price)}</Typography>
+                    {lead.status === "Accepted" && (
+                        <Typography variant="body2">{formatPrice(lead.price)}</Typography>
+                    )}
                 </Box>
                 {lead.status === "Accepted" && (
                     <Box display="flex" alignItems="center" mt={2}>
@@ -47,13 +49,15 @@ const LeadCard = ({ lead, onAccept, onDecline, index }: { lead: Lead; onAccept: 
                     <Typography variant="body2">{lead.description}</Typography>
                 </Box>
                 {lead.status === "Invited" && (
-                    <Box mt={2} display="flex" justifyContent="space-between">
-                        <Button onClick={() => onAccept(lead.id)} variant="contained" color="success">
+                    <Box mt={2} display="flex" justifyContent="left">
+                        <Button sx={{ mr: 2 }} onClick={() => onAccept(lead.id)} variant="contained" color="primary">
                             Accept
                         </Button>
-                        <Button onClick={() => onDecline(lead.id)} variant="contained" color="error">
+                        <Button sx={{ mr: 2 }} onClick={() => onDecline(lead.id)} variant="contained" color="secondary">
                             Decline
                         </Button>
+                        <Typography sx={{ mt: 1, mr: 1 }} fontWeight="bold" variant="body2">{formatPrice(lead.price)}</Typography>
+                        <Typography sx={{ mt: 1 }} variant="body2">Lead Invitation.</Typography>
                     </Box>
                 )}
             </CardContent>
