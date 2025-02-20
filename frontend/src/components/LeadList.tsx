@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getLeadsByStatus, acceptLead, declineLead } from '../services/LeadService';
 import { Lead } from '../interfaces/Lead';
 import LeadCard from './LeadCard';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 interface LeadListProps {
     status: string;
@@ -45,6 +45,7 @@ const LeadList: React.FC<LeadListProps> = ({ status }) => {
 
     return (
         <Box>
+            {leads.length === 0 && (<Typography>No leads found.</Typography>)}
             {leads.map((lead, index) => (
                 <LeadCard
                     index={index}
